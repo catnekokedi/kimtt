@@ -1,0 +1,85 @@
+jQuery(document).ready(function(){
+    var sc_src = '';
+    var vm_src = '';
+
+    var dialog_src = '';
+    var vocabulary_src = '';
+    var grammer_src = '';
+
+    
+    if(jQuery("div.ld-tabs-navigation").find("div.ld-tab").length){
+        jQuery("div.ld-tabs-navigation").find("div.ld-tab").click(function(){
+           
+            var tabName = jQuery(this).attr("data-tab");
+            var tabTxt = jQuery(this).text();
+            var contentTab = jQuery("div.ld-tabs-content").find("div.tab-content-"+tabName);
+            jQuery("div.ld-tabs-content").find("div.ld-tab-content").hide();
+            contentTab.show();
+            jQuery("div.ld-tabs-navigation").find("div.ld-tab").removeClass("ld-active");
+            jQuery(this).addClass("ld-active");
+
+
+            if("Grammar|Vocabulary|Dialogue".toUpperCase().indexOf(tabTxt.trim().toUpperCase())>-1) {
+                if(dialog_src === '') {
+                    dialog_src = jQuery(".tab-content-lesson").find("iframe").attr("src");
+                }
+
+                if(vocabulary_src === '')
+                {
+                    vocabulary_src = jQuery(".tab-content-custom1").find("iframe").attr("src");
+                }
+
+                if(grammer_src === ''){
+                    grammer_src = jQuery(".tab-content-custom3").find("iframe").attr("src");
+                }
+
+                if (tabName === "lesson") {
+                    if(dialog_src != ''){
+                        jQuery(".tab-content-lesson").find("iframe").attr("src", dialog_src);
+                        jQuery(".tab-content-custom1").find("iframe").attr("src","");
+                        jQuery(".tab-content-custom3").find("iframe").attr("src","");
+                    }
+                } else if (tabName === "custom1") {
+                    if(vocabulary_src != ''){
+                        jQuery(".tab-content-custom1").find("iframe").attr("src", vocabulary_src);
+                        jQuery(".tab-content-lesson").find("iframe").attr("src","")
+                        jQuery(".tab-content-custom3").find("iframe").attr("src","")
+                    }
+                } else if (tabName === "custom3") {
+                    if(grammer_src != ''){
+                        jQuery(".tab-content-custom3").find("iframe").attr("src", grammer_src);
+                        jQuery(".tab-content-lesson").find("iframe").attr("src","")
+                        jQuery(".tab-content-custom1").find("iframe").attr("src","");
+                    }
+                }
+
+
+            } else {
+                //30 lesson under
+                if(tabName != 'lesson'){
+                    if(sc_src == '' ){
+                        sc_src = jQuery(".tab-content-lesson").find("iframe").attr("src");
+                    }
+                    jQuery(".tab-content-lesson").find("iframe").attr("src", "");
+                } else {
+                    if(sc_src != ''){
+                        jQuery(".tab-content-lesson").find("iframe").attr("src", sc_src);
+                    }
+                }
+
+                if(tabName != 'custom1'){
+                    if(vm_src == ''){
+                        vm_src = jQuery(".tab-content-custom1").find("iframe").attr("src");
+                    }
+                    jQuery(".tab-content-custom1").find("iframe").attr("src", "");
+                } else {
+                    if(vm_src != ''){
+                        jQuery(".tab-content-custom1").find("iframe").attr("src", vm_src);
+                    }
+                }
+            }
+            console.log('Prd.v2310.1');
+        });
+    }
+
+});
