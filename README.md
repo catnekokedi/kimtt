@@ -1,2 +1,2 @@
 # kimtt
-learn something
+Learn Korean
