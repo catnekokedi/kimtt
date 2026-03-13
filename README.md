@@ -1,2 +1,0 @@
-# kimtt
-Learn Korean
